@@ -1,16 +1,16 @@
 require 'rubygems'
 require 'sinatra'
-require 'digest/sha1'
 require 'json'
 
 set :show_exceptions, false
+enable :inline_templates
 
 class Shortener
   attr_reader :store, :urls
 
   def initialize(store)
     @store = store
-    @urls = JSON.load((File.read(store) rescue '{ }'))
+    @urls = JSON.load((File.read(store) rescue '{}'))
   end
 
   def save
@@ -38,7 +38,7 @@ end
 
 before do
   @shorten = Shortener.new('shorten.js')
-  content_type "text/html", :charset => "utf-8"
+  content_type 'text/html', :charset => 'utf-8'
 end
 
 error do
@@ -68,15 +68,15 @@ __END__
 @@ layout
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Shortener</title>
-</head>
-<body>
-  <h1>URL Shortener</h1>
-  <%= yield %>
-  <p>by Arjan van der Gaag</p>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Shortener</title>
+  </head>
+  <body>
+    <h1>URL Shortener</h1>
+    <%= yield %>
+    <p>by Arjan van der Gaag</p>
+  </body>
 </html>
 @@ home
 <form action="/shorten" method="post" accept-charset="utf-8">
@@ -84,4 +84,4 @@ __END__
   <input type="submit" value="Shorten now &rarr;">
 </form>
 @@ shortened
-<p>The short URL <a href="http://url/<%= u[0] %>">http://url/<%= u[0] %></a> now points to <a href="<%= u[1] %>"><%= u[1] %></a>.</p>
+<p>The short URL <a href="http://shortener.arjanvandergaag.nl/<%= u[0] %>">http://shortener.arjanvandergaag.nl/<%= u[0] %></a> now points to <a href="<%= u[1] %>"><%= u[1] %></a>.</p>
