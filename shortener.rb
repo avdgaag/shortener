@@ -67,21 +67,80 @@ end
 __END__
 @@ layout
 <!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Shortener</title>
-  </head>
-  <body>
-    <h1>URL Shortener</h1>
-    <%= yield %>
-    <p>by Arjan van der Gaag</p>
-  </body>
+    <head>
+        <meta name="charset" content="UTF-8">
+        <title>Shrink URLs</title>
+        <style type="text/css" media="screen">
+            body {
+                margin: 60px 0;
+                text-align: center;
+                font: 14px/20px Helvetica, Arial, sans-serif;
+                color: #333;
+                background: #f3f3f3;
+            }
+            article {
+                display: block;
+                margin: 0 auto;
+                text-align: left;
+                width: 400px;
+                padding: 0 20px;
+                background: #fff;
+                border: 1px solid #eee;
+                border-bottom-color: #ddd;
+                border-right-color: #ddd;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                -webkit-box-shadow: 5px 5px 2px #eee;
+            }
+            footer {
+                text-align: center;
+                color: #999;
+                font-size: 11px;
+            }
+            h1 {
+                font-size: 20px;
+                text-shadow: 1px 1px 1px #ddd;
+            }
+            h1, p, form, header, footer {
+                display: block;
+                margin: 20px 0;
+            }
+            input {
+                font: 18px/20px Helvetica, Arial, sans-serif;
+                padding: 5px;
+                width: 280px;
+            }
+            button {
+                font: 18px/20px Helvetica, Arial, sans-serif;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <article>
+            <%= yield %>
+            <footer>
+                &copy; copyright 2010 Arjan van der Gaag.
+            </footer>
+        </article>
+    </body>
 </html>
 @@ home
+<header>
+    <h1>URL Shortener</h1>
+    <p>Paste a URL into the form below and have it shortened for your sharing pleasures:</p>
+</header>
 <form action="/shorten" method="post" accept-charset="utf-8">
-  <input type="text" name="url" placeholder="Paste a URL...">
-  <input type="submit" value="Shorten now &rarr;">
+    <div>
+        <input type="text" name="url" size="30" maxsize="60" placeholder="http://your-url.com">
+        <button type="submit" name="submit" value="submit">Shrink it!</button>
+    </div>
 </form>
 @@ shortened
-<p>The short URL <a href="http://shortener.arjanvandergaag.nl/<%= u[0] %>">http://shortener.arjanvandergaag.nl/<%= u[0] %></a> now points to <a href="<%= u[1] %>"><%= u[1] %></a>.</p>
+<header>
+  <h1>Your URL has been enshrunked!</h1>
+</header>
+<p><a href="http://shortener.arjanvandergaag.nl/<%= u[0] %>">http://shortener.arjanvandergaag.nl/<%= u[0] %></a> now points to <a href="<%= u[1] %>"><%= u[1] %></a>.</p>
