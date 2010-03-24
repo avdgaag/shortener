@@ -10,10 +10,6 @@ class TestShortener < Test::Unit::TestCase
     Sinatra::Application
   end
 
-  # configure do
-  #   set :views => File.join(File.dirname(__FILE__), '..', 'views')
-  # end
-
   def test_home_renders_content
     get '/'
     assert last_response.ok?
@@ -21,9 +17,8 @@ class TestShortener < Test::Unit::TestCase
   end
 
   def test_shorten_redirects_to_info
-    post '/shorten', :url => 'example.com'
+    post '/shorten', :url => 'http://example.com'
     assert_equal 302, last_response.status
     assert_match %r{/info/.*}, last_response['Location']
   end
-
 end
