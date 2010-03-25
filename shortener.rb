@@ -50,10 +50,8 @@ get '/' do
 end
 
 post '/shorten' do
-  begin
-    uri = URI.parse(params['url'])
-    raise URI::InvalidURIError unless uri.class == URI::HTTP
-  end
+  uri = URI.parse(params['url'])
+  raise URI::InvalidURIError unless uri.class == URI::HTTP
   redirect '/info/' + @shorten.shorten(params['url'])
 end
 
@@ -143,4 +141,4 @@ __END__
 <header>
   <h1>Your URL has been enshrunked!</h1>
 </header>
-<p><a href="http://shortener.arjanvandergaag.nl/<%= u[0] %>">http://shortener.arjanvandergaag.nl/<%= u[0] %></a> now points to <a href="<%= u[1] %>"><%= u[1] %></a>.</p>
+<p><a href="http://arjanvandergaag.nl/x/<%= u[0] %>">http://arjanvandergaag.nl/x/<%= u[0] %></a> now points to <a href="<%= u[1] %>"><%= u[1] %></a>.</p>
