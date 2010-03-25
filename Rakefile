@@ -11,8 +11,8 @@ end
 
 namespace :app do
   def ssh_sh(cmd)
-    Net::SSH.start('avdgaag.webfactional.com', 'avdgaag') do |ssh|
-      ssh.exec cmd
+    Net::SSH.start('avdgaag.webfactional.com', 'avdgaag', :verbose => :info) do |ssh|
+      ssh.exec! cmd
     end
   end
 

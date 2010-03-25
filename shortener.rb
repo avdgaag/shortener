@@ -52,7 +52,7 @@ end
 post '/shorten' do
   uri = URI.parse(params['url'])
   raise URI::InvalidURIError unless uri.class == URI::HTTP
-  redirect '/info/' + @shorten.shorten(params['url'])
+  redirect '/x/info/' + @shorten.shorten(params['url'])
 end
 
 get '/info/:hash' do |h|
@@ -131,7 +131,7 @@ __END__
     <h1>URL Shortener</h1>
     <p>Paste a URL into the form below and have it shortened for your sharing pleasures:</p>
 </header>
-<form action="/shorten" method="post" accept-charset="utf-8">
+<form action="/x/shorten" method="post" accept-charset="utf-8">
     <div>
         <input type="text" name="url" size="30" maxsize="60" placeholder="http://your-url.com">
         <button type="submit" name="submit" value="submit">Shrink it!</button>
@@ -141,4 +141,4 @@ __END__
 <header>
   <h1>Your URL has been enshrunked!</h1>
 </header>
-<p><a href="http://arjanvandergaag.nl/x/<%= u[0] %>">http://arjanvandergaag.nl/x/<%= u[0] %></a> now points to <a href="<%= u[1] %>"><%= u[1] %></a>.</p>
+<p><a href="http://arjanvandergaag.nl/x/h/<%= u[0] %>">http://arjanvandergaag.nl/x/h/<%= u[0] %></a> now points to <a href="<%= u[1] %>"><%= u[1] %></a>.</p>
